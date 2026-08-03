@@ -1,12 +1,12 @@
 .hero-ticker {
   height: 120px !important;
   background: var(--lime) !important;
-  overflow: hidden !important;
+  overflow: visible !important;
 }
 
 .hero-flow-track {
   position: absolute;
-  top: 50%;
+  top: calc(50% + 28px);
   left: 0;
   display: flex;
   align-items: center;
@@ -47,7 +47,7 @@
 
 @media (max-width: 900px) {
   .hero-ticker { height: 92px !important; }
-  .hero-flow-track { gap: 24px; animation-duration: 13s; }
+  .hero-flow-track { top: calc(50% + 23px); gap: 24px; animation-duration: 13s; }
   .hero-flow-arrow { width: calc(100vw - 24px) !important; height: 92px !important; }
   .hero-flow-arrow::before { width: calc(100% - 72px) !important; height: 46px !important; }
   .hero-flow-arrow::after {
