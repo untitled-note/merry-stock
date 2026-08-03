@@ -23,7 +23,7 @@
   flex: 0 0 auto;
   width: calc(100vw - 32px) !important;
   min-width: 0 !important;
-  height: 110px !important;
+  height: 120px !important;
   transform: none !important;
   filter: none !important;
   animation: none !important;
@@ -31,28 +31,28 @@
 
 .hero-flow-arrow::before {
   width: calc(100% - 96px) !important;
-  height: 56px !important;
+  height: 64px !important;
 }
 
 .hero-flow-arrow::after {
-  border-top-width: 55px !important;
-  border-bottom-width: 55px !important;
+  border-top-width: 60px !important;
+  border-bottom-width: 60px !important;
   border-left-width: 96px !important;
 }
 
 @keyframes hero-arrow-stream {
-  from { transform: translate(0, -50%); }
-  to { transform: translate(-100vw, -50%); }
+  from { transform: translate(-100vw, -50%); }
+  to { transform: translate(0, -50%); }
 }
 
 @media (max-width: 900px) {
   .hero-ticker { height: 92px !important; }
   .hero-flow-track { gap: 24px; animation-duration: 13s; }
-  .hero-flow-arrow { width: calc(100vw - 24px) !important; height: 82px !important; }
-  .hero-flow-arrow::before { width: calc(100% - 72px) !important; height: 40px !important; }
+  .hero-flow-arrow { width: calc(100vw - 24px) !important; height: 92px !important; }
+  .hero-flow-arrow::before { width: calc(100% - 72px) !important; height: 46px !important; }
   .hero-flow-arrow::after {
-    border-top-width: 41px !important;
-    border-bottom-width: 41px !important;
+    border-top-width: 46px !important;
+    border-bottom-width: 46px !important;
     border-left-width: 72px !important;
   }
 }
