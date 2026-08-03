@@ -1,5 +1,5 @@
 .hero-ticker {
-  height: 104px !important;
+  height: 120px !important;
   background: var(--lime) !important;
   overflow: hidden !important;
 }
@@ -10,10 +10,10 @@
   left: 0;
   display: flex;
   align-items: center;
-  gap: clamp(34px, 3vw, 68px);
+  gap: 32px;
   width: max-content;
-  transform: translate(-55%, -50%);
-  animation: hero-arrow-stream 13s linear infinite;
+  transform: translate(0, -50%);
+  animation: hero-arrow-stream 16s linear infinite;
 }
 
 .hero-flow-arrow {
@@ -21,42 +21,42 @@
   inset: auto !important;
   display: block;
   flex: 0 0 auto;
-  width: clamp(430px, 34vw, 650px) !important;
+  width: calc(100vw - 32px) !important;
   min-width: 0 !important;
-  height: 94px !important;
+  height: 110px !important;
   transform: none !important;
   filter: none !important;
   animation: none !important;
 }
 
 .hero-flow-arrow::before {
-  width: calc(100% - 82px) !important;
-  height: 28px !important;
+  width: calc(100% - 96px) !important;
+  height: 56px !important;
 }
 
 .hero-flow-arrow::after {
-  border-top-width: 47px !important;
-  border-bottom-width: 47px !important;
-  border-left-width: 82px !important;
+  border-top-width: 55px !important;
+  border-bottom-width: 55px !important;
+  border-left-width: 96px !important;
 }
 
 @keyframes hero-arrow-stream {
-  from { transform: translate(-55%, -50%); }
-  to { transform: translate(calc(100vw + 5%), -50%); }
+  from { transform: translate(0, -50%); }
+  to { transform: translate(-100vw, -50%); }
 }
 
 @media (max-width: 900px) {
-  .hero-ticker { height: 82px !important; }
-  .hero-flow-track { gap: 28px; animation-duration: 11s; }
-  .hero-flow-arrow { width: 330px !important; height: 72px !important; }
-  .hero-flow-arrow::before { width: calc(100% - 64px) !important; height: 20px !important; }
+  .hero-ticker { height: 92px !important; }
+  .hero-flow-track { gap: 24px; animation-duration: 13s; }
+  .hero-flow-arrow { width: calc(100vw - 24px) !important; height: 82px !important; }
+  .hero-flow-arrow::before { width: calc(100% - 72px) !important; height: 40px !important; }
   .hero-flow-arrow::after {
-    border-top-width: 36px !important;
-    border-bottom-width: 36px !important;
-    border-left-width: 64px !important;
+    border-top-width: 41px !important;
+    border-bottom-width: 41px !important;
+    border-left-width: 72px !important;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-flow-track { animation: none; transform: translate(-12%, -50%); }
+  .hero-flow-track { animation: none; transform: translate(0, -50%); }
 }
