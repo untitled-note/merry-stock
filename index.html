@@ -10,5 +10,43 @@
     <link rel="stylesheet" crossorigin href="./assets/index-1Hqf6_9i.css">
   <link rel="stylesheet" crossorigin href="./assets/arrow-fix.css?v=20260803-31">
 </head>
-  <body><div id="root"></div></body>
+  <body><div id="root"></div>
+    <!-- EXPERIMENTAL (2026-08-04): can image next to hero title. Delete this
+         <script>/<style> block to fully revert. -->
+    <style>
+      .hero-title-row{display:flex;align-items:center;gap:28px}
+      .hero-title-can{width:min(220px,26vw);height:auto;flex:0 0 auto}
+      @media(max-width:900px){
+        .hero-title-row{gap:16px}
+        .hero-title-can{width:min(140px,30vw)}
+      }
+    </style>
+    <script>
+      (function () {
+        function addHeroCan() {
+          var h1 = document.querySelector(".hero-main h1");
+          if (!h1 || h1.dataset.canInjected) return false;
+          var row = document.createElement("div");
+          row.className = "hero-title-row";
+          h1.parentNode.insertBefore(row, h1);
+          row.appendChild(h1);
+          var img = document.createElement("img");
+          img.className = "hero-title-can";
+          img.src = "./assets/can-egg-free-danish.png";
+          img.width = 760;
+          img.height = 581;
+          img.alt = "";
+          img.setAttribute("aria-hidden", "true");
+          row.appendChild(img);
+          h1.dataset.canInjected = "1";
+          return true;
+        }
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
+          if (addHeroCan() || tries > 100) clearInterval(timer);
+        }, 50);
+      })();
+    </script>
+  </body>
 </html>
