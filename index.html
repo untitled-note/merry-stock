@@ -11,25 +11,33 @@
   <link rel="stylesheet" crossorigin href="./assets/arrow-fix.css?v=20260803-31">
 </head>
   <body><div id="root"></div>
-    <!-- EXPERIMENTAL (2026-08-04): can image next to hero title. Delete this
-         <script>/<style> block to fully revert. -->
+    <!-- EXPERIMENTAL (2026-08-04): can image bottom-aligned with the hero
+         actions row. Delete this <script>/<style> block to fully revert. -->
     <style>
-      .hero-title-row{display:flex;align-items:center;gap:28px}
-      .hero-title-can{width:min(220px,26vw);height:auto;flex:0 0 auto}
+      .hero-can-align{display:flex;align-items:flex-end;gap:18px}
+      .hero-copy-stack{flex:1 1 auto;min-width:0}
+      .hero-title-can{width:min(150px,18vw);height:auto;flex:0 0 auto}
       @media(max-width:900px){
-        .hero-title-row{gap:16px}
-        .hero-title-can{width:min(140px,30vw)}
+        .hero-can-align{gap:14px}
+        .hero-title-can{width:min(120px,26vw)}
       }
     </style>
     <script>
       (function () {
         function addHeroCan() {
           var h1 = document.querySelector(".hero-main h1");
-          if (!h1 || h1.dataset.canInjected) return false;
-          var row = document.createElement("div");
-          row.className = "hero-title-row";
-          h1.parentNode.insertBefore(row, h1);
-          row.appendChild(h1);
+          var actions = document.querySelector(".hero-main .hero-actions");
+          if (!h1 || !actions) return false;
+          if (h1.dataset.canInjected) return true;
+          var heroMain = h1.parentNode;
+          var alignWrap = document.createElement("div");
+          alignWrap.className = "hero-can-align";
+          var copyStack = document.createElement("div");
+          copyStack.className = "hero-copy-stack";
+          heroMain.insertBefore(alignWrap, h1);
+          copyStack.appendChild(h1);
+          copyStack.appendChild(actions);
+          alignWrap.appendChild(copyStack);
           var img = document.createElement("img");
           img.className = "hero-title-can";
           img.src = "./assets/can-egg-free-danish.png";
@@ -37,7 +45,7 @@
           img.height = 581;
           img.alt = "";
           img.setAttribute("aria-hidden", "true");
-          row.appendChild(img);
+          alignWrap.appendChild(img);
           h1.dataset.canInjected = "1";
           return true;
         }
@@ -45,6 +53,123 @@
         var timer = setInterval(function () {
           tries++;
           if (addHeroCan() || tries > 100) clearInterval(timer);
+        }, 50);
+      })();
+    </script>
+
+    <!-- EXPERIMENTAL (2026-08-04): single seamless looping ticker arrow.
+         Delete this <style>/<script> block to fully revert. -->
+    <style>
+      .hero-flow-arrow{display:none!important}
+      .hero-flow-track{
+        position:absolute!important;
+        inset:0!important;
+        display:flex!important;
+        width:200%!important;
+        height:100%!important;
+        animation:hero-arrow-stream2 6s linear infinite!important;
+      }
+      .hero-flow-arrow2{
+        position:relative!important;
+        flex:0 0 50%!important;
+        width:50%!important;
+        height:100%!important;
+      }
+      .hero-flow-arrow2:before{
+        content:""!important;
+        position:absolute!important;
+        left:0!important;
+        top:50%!important;
+        width:calc(100% - 139px)!important;
+        height:56px!important;
+        background:#fff!important;
+        transform:translateY(-50%)!important;
+      }
+      .hero-flow-arrow2:after{
+        content:""!important;
+        position:absolute!important;
+        left:calc(100% - 139px)!important;
+        top:50%!important;
+        width:0!important;
+        height:0!important;
+        border-top:58px solid transparent!important;
+        border-bottom:58px solid transparent!important;
+        border-left:93px solid #fff!important;
+        transform:translateY(-50%)!important;
+      }
+      @media(max-width:900px){
+        .hero-flow-arrow2:before{width:calc(100% - 106px)!important;height:43px!important}
+        .hero-flow-arrow2:after{
+          left:calc(100% - 106px)!important;
+          border-top-width:45px!important;
+          border-bottom-width:45px!important;
+          border-left-width:71px!important;
+        }
+      }
+      .hero-lead{display:none!important}
+      @media(min-width:901px){
+        .hero{
+          min-height:calc(100vh - 280px)!important;
+          padding-top:60px!important;
+          padding-bottom:38px!important;
+        }
+        .hero-main{padding-top:58px!important;padding-bottom:24px!important}
+        .hero-service-wordmark{width:clamp(340px,50vw,820px)!important;height:auto!important;margin:24px 0 22px!important}
+        .hero h1{margin-bottom:12px!important}
+        .hero-orbit{width:min(460px,34vw)!important;margin:26px auto 12px!important}
+      }
+      @media(max-width:900px){
+        .hero{min-height:calc(100vh - 92px)!important}
+      }
+      .header{border-bottom:none!important}
+      @keyframes hero-arrow-stream2{
+        from{transform:translateX(-50%)}
+        to{transform:translateX(0)}
+      }
+      @media(prefers-reduced-motion:reduce){
+        .hero-flow-track{animation:none!important}
+      }
+    </style>
+    <script>
+      (function () {
+        function addFlowArrows() {
+          var track = document.querySelector(".hero-flow-track");
+          if (!track) return false;
+          if (track.dataset.arrow2Injected) return true;
+          for (var i = 0; i < 2; i++) {
+            var a = document.createElement("div");
+            a.className = "hero-flow-arrow2";
+            track.appendChild(a);
+          }
+          track.dataset.arrow2Injected = "1";
+          return true;
+        }
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
+          if (addFlowArrows() || tries > 100) clearInterval(timer);
+        }, 50);
+      })();
+    </script>
+
+    <!-- EXPERIMENTAL (2026-08-05): single-line MERRY STOCK wordmark.
+         Delete this <script> block to fully revert. -->
+    <script>
+      (function () {
+        function swapWordmark() {
+          var img = document.querySelector(".hero-service-wordmark");
+          if (!img) return false;
+          if (img.dataset.lineSwapped) return true;
+          img.src = "./assets/merry-stock-wordmark-line.webp";
+          img.width = 1129;
+          img.height = 148;
+          img.dataset.lineSwapped = "1";
+          return true;
+        }
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
+          if (swapWordmark() || tries > 100) clearInterval(timer);
         }, 50);
       })();
     </script>
