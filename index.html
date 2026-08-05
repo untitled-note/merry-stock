@@ -79,7 +79,7 @@
         content:""!important;
         position:absolute!important;
         left:0!important;
-        top:50%!important;
+        top:32%!important;
         width:calc(100% - 139px)!important;
         height:56px!important;
         background:#fff!important;
@@ -89,7 +89,7 @@
         content:""!important;
         position:absolute!important;
         left:calc(100% - 139px)!important;
-        top:50%!important;
+        top:32%!important;
         width:0!important;
         height:0!important;
         border-top:58px solid transparent!important;
@@ -117,6 +117,9 @@
         .hero-service-wordmark{width:clamp(340px,50vw,820px)!important;height:auto!important;margin:24px 0 22px!important}
         .hero h1{margin-bottom:12px!important}
         .hero-orbit{width:min(460px,34vw)!important;margin:26px auto 12px!important}
+        .orbit-core p{display:none!important}
+        .orbit-core strong{font-size:16px!important}
+        .orbit-core span{font-size:12px!important}
       }
       @media(max-width:900px){
         .hero{min-height:calc(100vh - 92px)!important}
@@ -170,6 +173,168 @@
         var timer = setInterval(function () {
           tries++;
           if (swapWordmark() || tries > 100) clearInterval(timer);
+        }, 50);
+      })();
+    </script>
+
+    <!-- EXPERIMENTAL (2026-08-05): header/footer MERRY STOCK wordmark image.
+         Delete this <style>/<script> block to fully revert. -->
+    <style>
+      .wordmark-text{height:36px;width:auto;display:block}
+      @media(max-width:520px){
+        .wordmark-text{height:32px}
+      }
+      .plans,.kit{background:var(--paper)!important}
+      .plan-grid article{border-color:var(--line)!important}
+      .menu-card{box-shadow:0 2px 14px rgba(21,44,36,.07)!important}
+    </style>
+    <script>
+      (function () {
+        function swapLockupText(span, altText) {
+          if (!span || span.dataset.lockupSwapped) return false;
+          var img = document.createElement("img");
+          img.className = "wordmark-text";
+          img.src = "./assets/merry-stock-wordmark-hd.png";
+          img.width = 732;
+          img.height = 412;
+          img.alt = altText;
+          if (!altText) img.setAttribute("aria-hidden", "true");
+          span.parentNode.replaceChild(img, span);
+          return true;
+        }
+        function swapLockups() {
+          var spans = document.querySelectorAll(".wordmark span");
+          if (!spans.length) return false;
+          var done = true;
+          spans.forEach(function (span, i) {
+            var isFooter = span.closest(".footer-mark");
+            var ok = swapLockupText(span, isFooter ? "MERRY STOCK" : "");
+            if (!ok) done = false;
+          });
+          return done;
+        }
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
+          if (swapLockups() || tries > 100) clearInterval(timer);
+        }, 50);
+      })();
+    </script>
+
+    <!-- EXPERIMENTAL (2026-08-05): remove the "WHY MERRY STOCK?" problem
+         section and its dead nav link. Delete this <script> block to fully
+         revert. -->
+    <script>
+      (function () {
+        function removeProblemSection() {
+          var section = document.querySelector("section.problem");
+          var navLink = document.querySelector('.header nav a[href="#concept"]');
+          if (!section) return false;
+          section.remove();
+          if (navLink) navLink.remove();
+          return true;
+        }
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
+          if (removeProblemSection() || tries > 100) clearInterval(timer);
+        }, 50);
+      })();
+    </script>
+
+    <!-- EXPERIMENTAL (2026-08-05): clean up the STEP 01 header (drop the
+         redundant order-guide micro-copy and the "まず、" prefix).
+         Delete this <style>/<script> block to fully revert. -->
+    <style>
+      .order-guide{display:none!important}
+      .step-title{margin-bottom:56px!important}
+      .step-title>p:last-child{font-size:15px!important;line-height:1.85!important;color:#5b675f!important}
+      .plan-card-head p{display:none!important}
+      .plan-grid article{padding:40px 32px 32px!important;min-height:0!important}
+      .plan-can{margin-top:32px!important}
+      .plan-grid h3{margin-top:28px!important}
+      .plan-grid small{margin-bottom:32px!important}
+      .plan-grid button{margin-top:0!important}
+    </style>
+    <script>
+      (function () {
+        function trimStepOneHeadline() {
+          var h2 = document.querySelector(".plans .step-title h2");
+          if (!h2) return false;
+          if (h2.dataset.trimmed) return true;
+          if (h2.firstChild && h2.firstChild.nodeType === 3) {
+            h2.firstChild.textContent = h2.firstChild.textContent.replace(/^まず、/, "");
+          }
+          h2.dataset.trimmed = "1";
+          return true;
+        }
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
+          if (trimStepOneHeadline() || tries > 100) clearInterval(timer);
+        }, 50);
+      })();
+    </script>
+
+    <!-- EXPERIMENTAL (2026-08-05): STEP 01/02 headers — fold "STEP NN / Label"
+         into one bold headline (big number + label) and drop the separate
+         large heading below it. Delete this <style>/<script> block to fully
+         revert. -->
+    <style>
+      .step-title h2{display:none!important}
+      .step-title .section-tag{
+        display:flex!important;
+        align-items:baseline!important;
+        justify-content:center!important;
+        width:100%!important;
+        gap:18px!important;
+        margin:0 0 20px!important;
+      }
+      .step-title .section-tag .step-num{
+        font:900 clamp(60px,6.8vw,100px)/.82 Arial,sans-serif!important;
+        color:var(--green)!important;
+        letter-spacing:-.03em!important;
+      }
+      .step-title .section-tag .step-label{
+        font:700 clamp(28px,3.2vw,46px)/1.15 "Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif!important;
+        color:var(--ink)!important;
+        letter-spacing:-.02em!important;
+      }
+      .step-title>p:last-child{margin-top:0!important}
+      @media(min-width:901px) and (max-height:940px){
+        .step-title .section-tag{gap:14px!important;margin-bottom:14px!important}
+        .step-title .section-tag .step-num{font-size:clamp(44px,5.2vw,68px)!important}
+        .step-title .section-tag .step-label{font-size:clamp(22px,2.6vw,32px)!important}
+      }
+      @media(max-width:900px){
+        .step-title .section-tag{justify-content:flex-start!important;gap:12px!important}
+        .step-title .section-tag .step-num{font-size:clamp(44px,14vw,64px)!important}
+        .step-title .section-tag .step-label{font-size:clamp(22px,7vw,30px)!important}
+      }
+    </style>
+    <script>
+      (function () {
+        function upgradeStepHeaders() {
+          var tags = document.querySelectorAll(".step-title .section-tag");
+          if (!tags.length) return false;
+          var done = true;
+          tags.forEach(function (tag) {
+            if (tag.dataset.stepUpgraded) return;
+            var m = tag.textContent.match(/STEP\s*(\d+)\s*\/\s*(.+)/);
+            if (!m) { done = false; return; }
+            tag.innerHTML =
+              '<span class="step-num">' + m[1] + '</span>' +
+              '<span class="step-label">' + m[2] + '</span>';
+            tag.dataset.stepUpgraded = "1";
+            var h2 = tag.parentElement.querySelector("h2");
+            if (h2) h2.style.display = "none";
+          });
+          return done;
+        }
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
+          if (upgradeStepHeaders() || tries > 100) clearInterval(timer);
         }, 50);
       })();
     </script>
