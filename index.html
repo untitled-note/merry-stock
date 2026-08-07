@@ -40,9 +40,9 @@
           alignWrap.appendChild(copyStack);
           var img = document.createElement("img");
           img.className = "hero-title-can";
-          img.src = "./assets/can-egg-free-danish.png";
-          img.width = 760;
-          img.height = 581;
+          img.src = "./assets/can-egg-free-danish.png?v=20260807b";
+          img.width = 1038;
+          img.height = 898;
           img.alt = "";
           img.setAttribute("aria-hidden", "true");
           alignWrap.appendChild(img);
@@ -184,8 +184,8 @@
       @media(max-width:520px){
         .wordmark-text{height:32px}
       }
-      .plans,.kit{background:var(--paper)!important}
-      .plan-grid article{border-color:var(--line)!important}
+      .plans,.kit{background:#eaefc9!important}
+      .plan-grid article{border-color:transparent!important;border-radius:16px!important}
       .menu-card{box-shadow:0 2px 14px rgba(21,44,36,.07)!important}
     </style>
     <script>
@@ -335,6 +335,514 @@
         var timer = setInterval(function () {
           tries++;
           if (upgradeStepHeaders() || tries > 100) clearInterval(timer);
+        }, 50);
+      })();
+    </script>
+
+    <!-- EXPERIMENTAL (2026-08-05): "future" section — illustration on the
+         right (larger), copy on the left, drop the OUR FUTURE tag and the
+         supporting paragraph. Delete this <style>/<script> block to fully
+         revert. -->
+    <style>
+      .future{
+        display:flex!important;
+        align-items:center!important;
+        justify-content:space-between!important;
+        gap:4vw!important;
+        text-align:left!important;
+        padding:110px 6vw!important;
+      }
+      .future-copy{display:flex!important;flex-direction:column!important;align-items:flex-start!important;flex:0 1 660px!important}
+      .future blockquote{font-size:clamp(36px,3.9vw,56px)!important;line-height:1.22!important;margin:0 0 40px!important;white-space:nowrap!important}
+      .future-illustration{width:min(560px,42vw)!important;height:auto!important;flex:0 0 auto!important}
+      @media(max-width:900px){
+        .future{flex-direction:column!important;text-align:center!important;padding:90px 24px!important;gap:36px!important}
+        .future-copy{align-items:center!important;flex:0 1 auto!important}
+        .future blockquote{font-size:clamp(32px,8vw,46px)!important}
+        .future-illustration{width:min(360px,70vw)!important;order:-1!important}
+      }
+    </style>
+    <script>
+      (function () {
+        function relayoutFuture() {
+          var future = document.querySelector(".future");
+          if (!future) return false;
+          if (future.dataset.futureRelaid) return true;
+
+          var blockquote = future.querySelector("blockquote");
+          var button = future.querySelector("button");
+          if (!blockquote || !button) return false;
+
+          var tag = future.querySelector(".section-tag");
+          if (tag) tag.remove();
+          var desc = future.querySelector("p");
+          if (desc) desc.remove();
+
+          var copy = document.createElement("div");
+          copy.className = "future-copy";
+          future.insertBefore(copy, blockquote);
+          copy.appendChild(blockquote);
+          copy.appendChild(button);
+
+          var img = document.createElement("img");
+          img.className = "future-illustration";
+          img.src = "./assets/future-illustration-green.png?v=20260807e";
+          img.alt = "";
+          img.setAttribute("aria-hidden", "true");
+          future.appendChild(img);
+
+          future.dataset.futureRelaid = "1";
+          return true;
+        }
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
+          if (relayoutFuture() || tries > 100) clearInterval(timer);
+        }, 50);
+      })();
+    </script>
+
+    <!-- EXPERIMENTAL (2026-08-05): footer matches the header/hero lime
+         background; hero gets a taller lime area on the first screen.
+         Delete this <style> block to fully revert. -->
+    <style>
+      footer{background:var(--lime)!important;border-top:0!important}
+      @media(min-width:901px){
+        .hero{min-height:calc(100vh - 120px)!important}
+      }
+    </style>
+
+    <!-- EXPERIMENTAL (2026-08-05): remove the menu concept-image note; swap
+         the plan cards' "01/02/03" badge + abstract circle for actual can
+         icons (one per person). Delete this <style>/<script> block to fully
+         revert. -->
+    <style>
+      .plan-cans{
+        display:grid!important;
+        justify-content:center!important;
+        align-items:center!important;
+        height:96px!important;
+        margin:30px auto 20px!important;
+        gap:8px!important;
+      }
+      .plan-cans-1{grid-template-columns:1fr!important}
+      .plan-cans-2{grid-template-columns:repeat(2,1fr)!important}
+      .plan-cans-4{grid-template-columns:repeat(2,1fr)!important}
+      .can-icon{
+        display:block!important;
+        border-radius:50%!important;
+        border:2px solid var(--green)!important;
+        background:var(--paper)!important;
+        position:relative!important;
+        animation:can-bob 4.8s ease-in-out infinite!important;
+      }
+      .can-icon:before{
+        content:""!important;
+        position:absolute!important;
+        inset:13%!important;
+        border-radius:50%!important;
+        border:2px solid rgba(21,44,36,.22)!important;
+      }
+      .plan-cans-1 .can-icon{width:96px!important;height:96px!important}
+      .plan-cans-2 .can-icon{width:92px!important;height:92px!important}
+      .plan-cans-4 .can-icon{width:44px!important;height:44px!important}
+      .plan-cans .can-icon:nth-child(2){animation-delay:-1.2s!important}
+      .plan-cans .can-icon:nth-child(3){animation-delay:-2.4s!important}
+      .plan-cans .can-icon:nth-child(4){animation-delay:-3.6s!important}
+      .future{background:var(--lime)!important;padding:62px 6vw!important}
+      .future blockquote{color:var(--green)!important}
+      .future .button{background:var(--green)!important;color:#fff!important}
+      .annual-loop{display:none!important}
+      .how{padding-bottom:70px!important}
+      footer{min-height:0!important;padding:28px 5vw 36px!important}
+    </style>
+    <script>
+      (function () {
+        function removeMenuNote() {
+          var note = document.querySelector(".menu-note");
+          if (note) note.remove();
+          return true;
+        }
+        function upgradePlanCards() {
+          var cans = document.querySelectorAll(".plan-grid article .plan-can");
+          if (!cans.length) return false;
+          var done = true;
+          cans.forEach(function (canEl) {
+            var article = canEl.closest("article");
+            if (article.dataset.canUpgraded) return;
+            var b = canEl.querySelector("b");
+            var count = b ? parseInt(b.textContent, 10) : NaN;
+            if (!count) { done = false; return; }
+            var wrap = document.createElement("div");
+            wrap.className = "plan-cans plan-cans-" + count;
+            wrap.setAttribute("aria-hidden", "true");
+            for (var i = 0; i < count; i++) {
+              var icon = document.createElement("span");
+              icon.className = "can-icon";
+              wrap.appendChild(icon);
+            }
+            canEl.parentNode.insertBefore(wrap, canEl);
+            canEl.remove();
+            var head = article.querySelector(".plan-card-head");
+            if (head) head.remove();
+            article.dataset.canUpgraded = "1";
+          });
+          return done;
+        }
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
+          var a = removeMenuNote();
+          var b = upgradePlanCards();
+          if ((a && b) || tries > 100) clearInterval(timer);
+        }, 50);
+      })();
+    </script>
+
+    <!-- EXPERIMENTAL (2026-08-05): enlarge the primary CTA buttons (hero +
+         future) and shorten the hero button label. Delete this <style>/<script>
+         block to fully revert. -->
+    <style>
+      .button.primary{font-size:14px!important;padding:23px 30px!important}
+      .hero-actions{gap:clamp(20px,3vw,40px)!important;flex-wrap:nowrap!important}
+      .hero-actions .button.primary{
+        font-size:clamp(13px,1.1vw,16px)!important;
+        padding:clamp(18px,1.9vw,26px) clamp(22px,2.6vw,34px)!important;
+        white-space:nowrap!important;
+      }
+      .hero-actions .text-link{
+        font-size:clamp(13px,1.1vw,16px)!important;
+        white-space:nowrap!important;
+      }
+      .hero-can-align{gap:clamp(14px,2.4vw,28px)!important}
+      .hero-title-can{width:min(130px,15vw)!important}
+      .future .button{
+        font-size:clamp(13px,1.1vw,16px)!important;
+        padding:clamp(18px,1.9vw,26px) clamp(22px,2.6vw,34px)!important;
+        white-space:nowrap!important;
+      }
+      .brand-symbol{border-radius:10px!important}
+    </style>
+    <script>
+      (function () {
+        function shortenHeroButton() {
+          var btn = document.querySelector(".hero-actions .button.primary");
+          if (!btn) return false;
+          if (btn.dataset.labelShortened) return true;
+          var span = btn.querySelector("span");
+          var arrow = span ? span.textContent : "→";
+          btn.textContent = "備蓄を選ぶ ";
+          var newSpan = document.createElement("span");
+          newSpan.textContent = arrow;
+          btn.appendChild(newSpan);
+          btn.dataset.labelShortened = "1";
+          return true;
+        }
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
+          if (shortenHeroButton() || tries > 100) clearInterval(timer);
+        }, 50);
+      })();
+    </script>
+
+    <!-- EXPERIMENTAL (2026-08-05): new "message card" section between the
+         cycle overview (how) and the closing CTA (future) — the emotional /
+         keepsake value the client asked to add. Delete this <style>/<script>
+         block to fully revert. -->
+    <style>
+      .keepsake{background:var(--paper)!important;padding:110px 6vw!important;order:6!important}
+      .keepsake-intro{max-width:760px;margin:0 auto 60px;text-align:center}
+      .keepsake-intro .section-tag{display:block;margin-bottom:16px}
+      .keepsake-intro h2{font-size:clamp(38px,4.2vw,58px);line-height:1.15;letter-spacing:-.03em;margin:0 0 20px;font-weight:700;color:var(--ink)}
+      .keepsake-intro>p{font-size:14px;line-height:1.9;color:#4c584f}
+      .keepsake-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:1120px;margin:0 auto}
+      .keepsake-grid article{border:1px solid var(--line);padding:36px 32px;background:var(--paper)}
+      .keepsake-tag{display:inline-block;font:800 10px Arial;letter-spacing:.14em;color:var(--green);border:1px solid var(--green);border-radius:999px;padding:6px 14px;margin-bottom:18px}
+      .keepsake-grid h3{font-size:22px;margin:0 0 12px;letter-spacing:-.02em;color:var(--ink)}
+      .keepsake-grid p{font-size:13px;line-height:1.9;color:#4c584f;margin:0}
+      @media(max-width:900px){
+        .keepsake{padding:80px 24px}
+        .keepsake-grid{grid-template-columns:1fr}
+      }
+    </style>
+    <script>
+      (function () {
+        function addKeepsakeSection() {
+          var how = document.querySelector("section.how");
+          if (!how || !how.parentNode) return false;
+          if (document.querySelector(".keepsake")) return true;
+
+          var section = document.createElement("section");
+          section.className = "keepsake";
+          section.id = "keepsake";
+
+          var intro = document.createElement("div");
+          intro.className = "keepsake-intro";
+          intro.innerHTML =
+            '<p class="section-tag">MESSAGE CARD</p>' +
+            "<h2>備蓄と一緒に、<br />家族の想いも備える。</h2>" +
+            "<p>クリスマスに、家族や自分への感謝のメッセージや写真、緊急時の連絡先・避難場所などを一枚のカードに書き、次の備蓄品と一緒にしまっておきます。</p>";
+          section.appendChild(intro);
+
+          var grid = document.createElement("div");
+          grid.className = "keepsake-grid";
+          grid.innerHTML =
+            "<article>" +
+              '<span class="keepsake-tag">平時の場合</span>' +
+              "<h3>毎年のクリスマスに</h3>" +
+              "<p>翌年のクリスマスに開けたときは、一年間の無事に感謝しながら振り返る、家族の恒例行事に。</p>" +
+            "</article>" +
+            "<article>" +
+              '<span class="keepsake-tag">有事の場合</span>' +
+              "<h3>もしものときに</h3>" +
+              "<p>災害時に開けたときは、家族の言葉と緊急連絡先が、落ち着いて行動するための支えに。</p>" +
+            "</article>";
+          section.appendChild(grid);
+
+          how.parentNode.insertBefore(section, how.nextSibling);
+          return true;
+        }
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
+          if (addKeepsakeSection() || tries > 100) clearInterval(timer);
+        }, 50);
+      })();
+    </script>
+
+    <!-- EXPERIMENTAL (2026-08-06): unify the old "how" (cycle) and "keepsake"
+         (message card) sections into a single "about" section placed right
+         after the hero, before STEP 01 — so visitors understand what
+         "備蓄" means and what the service does before being asked to pick a
+         plan. The old how/keepsake sections are hidden (their content now
+         lives here). Delete this <style>/<script> block to fully revert. -->
+    <style>
+      section.how{display:none!important}
+      .keepsake{display:none!important}
+      .about{background:var(--paper)!important;padding:100px 6vw 0!important;order:3!important}
+      .about-steps-wrap{
+        width:100vw;
+        margin-left:calc(50% - 50vw);
+        margin-right:calc(50% - 50vw);
+        box-sizing:border-box;
+        background:var(--cream);
+        padding:100px 6vw;
+      }
+      @media(max-width:900px){
+        .about-steps-wrap{padding:70px 24px}
+      }
+      .about-steps-wrap>.about-block#flow{border-top:none;padding-top:0}
+      .plans{order:4!important}
+      .kit{order:5!important}
+      .about-intro{display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:center;max-width:1160px;margin:0 auto 90px}
+      .about-intro-copy{text-align:left}
+      .about-intro .section-tag{display:block;margin-bottom:16px}
+      .about-intro h2{font-size:clamp(28px,3.2vw,42px);line-height:1.35;letter-spacing:-.02em;margin:0 0 22px;font-weight:700;color:var(--ink)}
+      .about-intro-copy>p{font-size:14px;line-height:1.9;color:#4c584f;margin:0 0 14px}
+      .about-photo{width:100%;height:auto;display:block;border-radius:4px}
+      .about-block{max-width:1120px;margin:0 auto 90px;padding-top:70px;border-top:1px solid var(--line)}
+      .about-block:last-child{margin-bottom:0}
+      .about-block>.section-tag{display:block;text-align:center;color:var(--green);margin-bottom:14px}
+      .about-block>h3{font-size:clamp(26px,2.8vw,38px);line-height:1.3;letter-spacing:-.02em;margin:0 0 16px;color:var(--ink);text-align:center}
+      .about-block>p{font-size:14px;line-height:1.9;color:#4c584f;text-align:center;max-width:600px;margin:0 auto 44px}
+      .about-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+      .about-flow-photo{position:relative;border-radius:4px;overflow:hidden;margin-bottom:18px}
+      .about-flow-photo img{width:100%;height:auto;display:block}
+      .about-flow-photo span{position:absolute;top:10px;left:10px;width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font:700 11px Arial;display:grid;place-items:center}
+      .about-flow h4{font-size:18px;margin:0 0 8px;color:var(--ink)}
+      .about-flow p{font-size:12px;line-height:1.7;color:#4c584f}
+      .about-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+      .about-grid article{border:1px solid var(--line);background:var(--paper);overflow:hidden}
+      .about-grid-photo{width:100%;height:auto;display:block}
+      .about-grid article>.keepsake-tag{margin:28px 0 0 28px}
+      .about-grid h4{font-size:20px;margin:12px 28px 10px}
+      .about-grid p{font-size:13px;line-height:1.85;color:#4c584f;margin:0 28px 28px}
+      .keepsake-tag{display:inline-block;font:800 10px Arial;letter-spacing:.14em;color:var(--green);border:1px solid var(--green);border-radius:999px;padding:6px 14px}
+      @media(max-width:900px){
+        .about{padding:70px 24px}
+        .about-intro{grid-template-columns:1fr;gap:32px}
+        .about-intro-copy{order:2}
+        .about-photo{order:1}
+        .about-flow{grid-template-columns:1fr 1fr;gap:28px}
+        .about-grid{grid-template-columns:1fr}
+      }
+      .about-block>h3{font-size:clamp(28px,3.2vw,42px)!important;font-weight:700!important}
+      .about-block>p{max-width:640px!important;text-wrap:pretty!important}
+      .about-block:last-child>p{max-width:820px!important}
+      .about-block>h3{
+        font-size:clamp(32px,3.8vw,52px)!important;
+        font-weight:800!important;
+      }
+      .about-intro h2{
+        font-size:clamp(28px,3.6vw,46px)!important;
+        font-weight:900!important;
+        white-space:nowrap;
+      }
+      @media(max-width:900px){
+        .about-intro h2{white-space:normal}
+      }
+      .about-intro{grid-template-columns:.95fr 1.25fr!important}
+      @media(max-width:900px){
+        .about-intro{grid-template-columns:1fr!important}
+      }
+      .menu-card{border-radius:16px!important}
+      .button.primary,
+      .plan-grid button,
+      .future .button,
+      .modal-submit,
+      .complete button{
+        border-radius:10px!important;
+      }
+      .about-flow-photo{border-radius:0!important}
+      .hero-title-can{width:min(250px,14.5vw)!important}
+      .hero h1{font-size:clamp(21px,2.3vw,36px)!important;margin-top:0!important}
+      .hero-service-wordmark{margin:20px 0 22px!important}
+      @media(min-width:901px){
+        .hero-main{padding-top:36px!important}
+      }
+      .about{padding-top:160px!important}
+      .about-intro{align-items:start!important;margin-bottom:160px!important}
+      .about-intro h2{margin-bottom:24px!important}
+      .about-photo{aspect-ratio:16/9!important;object-fit:cover!important;margin-top:0!important}
+      .hero-title-can{width:min(220px,13vw)!important}
+      .hero-can-align{align-items:flex-end!important}
+      @media(max-width:900px){
+        .hero-title-can{width:min(200px,34vw)!important}
+      }
+      .wordmark:before{border-radius:10px!important}
+      .kit{padding-bottom:130px!important}
+      .plan-grid article{min-height:460px!important}
+      .menu-grid{grid-template-rows:460px!important}
+      @media(max-width:900px){
+        .menu-grid{grid-template-rows:repeat(3,460px)!important}
+      }
+    </style>
+    <script>
+      (function () {
+        var flow = [
+          ["ph-step1.png", "01", "備える", "人数に合った備蓄食品が、ひと箱にまとまって届きます。ここから、また一年の備えが始まります。"],
+          ["ph-step2.png", "02", "知らせる", "クリスマスの約1か月前にお知らせ。届いていた備蓄から、つくりたいごちそうを選びます。"],
+          ["ph-step3.png", "03", "作る", "リメイク食材とレシピが届き、パエリアやケーキなどのクリスマス料理をつくります。"],
+          ["ph-step4.png", "04", "味わう", "できあがった料理を家族で味わい、食べた分だけ新しい備蓄が一緒に届きます。"]
+        ];
+
+        function fixNavLink() {
+          var nav = document.querySelector(".header nav");
+          if (!nav) return false;
+          var oldLink = nav.querySelector('a[href="#how"]');
+          if (oldLink) oldLink.setAttribute("href", "#flow");
+          var aboutFlowLink = nav.querySelector('a[href="#about"]');
+          if (aboutFlowLink && aboutFlowLink.textContent.indexOf("サービスの流れ") !== -1) {
+            aboutFlowLink.setAttribute("href", "#flow");
+          }
+          if (nav.dataset.navReordered) return true;
+          var aboutIntroLink = document.createElement("a");
+          aboutIntroLink.setAttribute("href", "#about");
+          aboutIntroLink.textContent = "MERRY STOCKとは？";
+          nav.insertBefore(aboutIntroLink, nav.firstElementChild);
+          nav.dataset.navReordered = "1";
+          return true;
+        }
+
+        function addAboutSection() {
+          var ticker = document.querySelector(".hero-ticker");
+          if (!ticker || !ticker.parentNode) return false;
+          if (document.querySelector(".about")) return true;
+
+          var section = document.createElement("section");
+          section.className = "about";
+          section.id = "about";
+
+          var intro = document.createElement("div");
+          intro.className = "about-intro";
+          intro.innerHTML =
+            '<div class="about-intro-copy">' +
+              "<h2>MERRY STOCKとは？</h2>" +
+              "<p>災害に備えて非常食を用意しても、<br />賞味期限が近づいたまま、気づけば処分してしまう。<br />そんな経験はありませんか？</p>" +
+              "<p>MERRY STOCKは、<br />賞味期限が近づいた非常食を、クリスマスにリメイクして味わい、<br />食べた分だけ、また新しく備え直す、年に一度の定期便サービスです。</p>" +
+              "<p>もしもの日のための備えを、家族で味わう、年に一度の楽しみに。<br />そんな循環への想いから、MERRY STOCKが生まれました。</p>" +
+            "</div>" +
+            '<img class="about-photo" src="./assets/ph-intro.png" alt="" aria-hidden="true" />';
+          section.appendChild(intro);
+
+          var stepsWrap = document.createElement("div");
+          stepsWrap.className = "about-steps-wrap";
+          section.appendChild(stepsWrap);
+
+          var block1 = document.createElement("div");
+          block1.className = "about-block";
+          block1.id = "flow";
+          var flowHtml = "";
+          flow.forEach(function (f) {
+            flowHtml +=
+              "<article>" +
+                '<div class="about-flow-photo">' +
+                  '<img src="./assets/' + f[0] + '?v=20260807" alt="" aria-hidden="true" />' +
+                  "<span>" + f[1] + "</span>" +
+                "</div>" +
+                "<h4>" + f[2] + "</h4>" +
+                "<p>" + f[3] + "</p>" +
+              "</article>";
+          });
+          block1.innerHTML =
+            "<h3>サービスの流れ</h3>" +
+            "<p>注文を思い出さなくても、毎年決まった時期に食べる体験と次の備えをまとめてお届けします。</p>" +
+            '<div class="about-flow">' + flowHtml + "</div>";
+          stepsWrap.appendChild(block1);
+
+          var block2 = document.createElement("div");
+          block2.className = "about-block";
+          block2.innerHTML =
+            "<h3>備蓄と一緒に、<br />家族の想いも備える。</h3>" +
+            "<p>クリスマスに、家族や自分への感謝のメッセージや写真、緊急時の連絡先・避難場所などを一枚のカードに書き、<br />次の備蓄品と一緒にしまっておきます。</p>" +
+            '<div class="about-grid">' +
+              "<article>" +
+                '<img class="about-grid-photo" src="./assets/ph-peace.png" alt="" aria-hidden="true" />' +
+                '<span class="keepsake-tag">平時の場合</span>' +
+                "<h4>毎年のクリスマスに</h4>" +
+                "<p>翌年のクリスマスに開けたときは、一年間の無事に感謝しながら振り返る、<br />家族の恒例行事に。</p>" +
+              "</article>" +
+              "<article>" +
+                '<img class="about-grid-photo" src="./assets/ph-emergency.png" alt="" aria-hidden="true" />' +
+                '<span class="keepsake-tag">有事の場合</span>' +
+                "<h4>もしものときに</h4>" +
+                "<p>災害時に開けたときは、家族の言葉と緊急連絡先が、<br />落ち着いて行動するための支えに。</p>" +
+              "</article>" +
+            "</div>";
+          stepsWrap.appendChild(block2);
+
+          ticker.parentNode.insertBefore(section, ticker.nextSibling);
+          return true;
+        }
+
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
+          var a = addAboutSection();
+          var b = fixNavLink();
+          if ((a && b) || tries > 100) clearInterval(timer);
+        }, 50);
+      })();
+    </script>
+
+    <!-- EXPERIMENTAL (2026-08-06): remove the "CONCEPT PROTOTYPE" note under
+         the plan cards and tighten the section's bottom padding.
+         Delete this <style>/<script> block to fully revert. -->
+    <style>
+      .plans{padding-bottom:60px!important}
+    </style>
+    <script>
+      (function () {
+        function removePrototypeNote() {
+          var note = document.querySelector(".prototype-note");
+          if (note) note.remove();
+          return true;
+        }
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
+          if (removePrototypeNote() || tries > 100) clearInterval(timer);
         }, 50);
       })();
     </script>
