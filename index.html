@@ -663,7 +663,7 @@
         .about{padding:70px 24px}
         .about-intro{grid-template-columns:1fr;gap:32px}
         .about-intro-copy{order:2}
-        .about-photo{order:1}
+        .about-photo-wrap{order:1}
         .about-flow{grid-template-columns:1fr 1fr;gap:28px}
         .about-grid{grid-template-columns:1fr}
       }
@@ -702,9 +702,10 @@
         .hero-main{padding-top:36px!important}
       }
       .about{padding-top:160px!important}
-      .about-intro{align-items:start!important;margin-bottom:160px!important}
-      .about-intro h2{margin-bottom:24px!important}
-      .about-photo{aspect-ratio:16/9!important;object-fit:cover!important;margin-top:0!important}
+      .about-intro{align-items:stretch!important;margin-bottom:160px!important}
+      .about-intro h2{margin-bottom:14px!important}
+      .about-photo-wrap{position:relative;z-index:5;overflow:visible;height:auto}
+      .about-photo{position:static!important;z-index:5!important;inset:auto!important;width:100%!important;height:auto!important;margin:0!important;object-fit:contain!important;object-position:initial!important}
       .hero-title-can{width:min(220px,13vw)!important}
       .hero-can-align{align-items:flex-end!important}
       @media(max-width:900px){
@@ -723,8 +724,9 @@
         var flow = [
           ["ph-step1.png", "01", "備える", "人数に合った備蓄食品が、ひと箱にまとまって届きます。ここから、また一年の備えが始まります。"],
           ["ph-step2.png", "02", "知らせる", "クリスマスの約1か月前にお知らせ。届いていた備蓄から、つくりたいごちそうを選びます。"],
-          ["ph-step3.png", "03", "作る", "リメイク食材とレシピが届き、パエリアやケーキなどのクリスマス料理をつくります。"],
-          ["ph-step4.png", "04", "味わう", "できあがった料理を家族で味わい、食べた分だけ新しい備蓄が一緒に届きます。"]
+          ["ph-step-arrive.png", "03", "届く", "選んだごちそうに合わせて、リメイク食材とレシピが届きます。"],
+          ["ph-step3.png", "04", "作る", "届いた食材とレシピで、パエリアやケーキなどのクリスマス料理をつくります。"],
+          ["ph-step4.png", "05", "味わう", "できあがった料理を家族で味わい、食べた分だけ新しい備蓄が一緒に届きます。"]
         ];
 
         function fixNavLink() {
@@ -763,7 +765,7 @@
               "<p>MERRY STOCKは、<br />賞味期限が近づいた非常食を、クリスマスにリメイクして味わい、<br />食べた分だけ、また新しく備え直す、年に一度の定期便サービスです。</p>" +
               "<p>もしもの日のための備えを、家族で味わう、年に一度の楽しみに。<br />そんな循環への想いから、MERRY STOCKが生まれました。</p>" +
             "</div>" +
-            '<img class="about-photo" src="./assets/ph-intro.png" alt="" aria-hidden="true" />';
+            '<div class="about-photo-wrap"><img class="about-photo" src="./assets/ph-intro.png?v=20260808d" alt="" aria-hidden="true" /></div>';
           section.appendChild(intro);
 
           var stepsWrap = document.createElement("div");
@@ -778,7 +780,7 @@
             flowHtml +=
               "<article>" +
                 '<div class="about-flow-photo">' +
-                  '<img src="./assets/' + f[0] + '?v=20260807" alt="" aria-hidden="true" />' +
+                  '<img src="./assets/' + f[0] + '?v=20260808" alt="" aria-hidden="true" />' +
                   "<span>" + f[1] + "</span>" +
                 "</div>" +
                 "<h4>" + f[2] + "</h4>" +
@@ -843,6 +845,146 @@
         var timer = setInterval(function () {
           tries++;
           if (removePrototypeNote() || tries > 100) clearInterval(timer);
+        }, 50);
+      })();
+    </script>
+
+    <!-- EXPERIMENTAL (2026-08-08): swap the closing "future" section's headline
+         to "MERRY STOCKする" and keep the old line as small subtext below it.
+         Delete this <style>/<script> block to fully revert. -->
+    <style>
+      .future blockquote{margin-bottom:8px!important}
+      .future-sub{font-size:16px;line-height:1.8;margin:0 0 24px;color:var(--green);opacity:1;white-space:nowrap}
+      .about-flow{grid-template-columns:repeat(5,1fr)!important}
+      @media(max-width:900px){
+        .about-flow{grid-template-columns:1fr 1fr!important}
+      }
+    </style>
+    <script>
+      (function () {
+        function updateFutureHeadline() {
+          var bq = document.querySelector(".future blockquote");
+          if (!bq) return false;
+          if (bq.dataset.headlineUpdated) return true;
+          bq.innerHTML = "MERRY STOCKする";
+          var sub = document.createElement("p");
+          sub.className = "future-sub";
+          sub.innerHTML = "季節がめぐるように、備蓄もめぐりはじめる。";
+          bq.parentNode.insertBefore(sub, bq.nextSibling);
+          bq.dataset.headlineUpdated = "1";
+          return true;
+        }
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
+          if (updateFutureHeadline() || tries > 100) clearInterval(timer);
+        }, 50);
+      })();
+    </script>
+
+    <!-- EXPERIMENTAL (2026-08-08): リメイク品を選ぶ — add a category tag per
+         card and swap the single fixed dish name for a short list of remake
+         recipe options. Delete this <style>/<script> block to fully revert. -->
+    <style>
+      .menu-card{position:relative}
+      .menu-category{
+        position:absolute;
+        top:18px;
+        left:18px;
+        z-index:2;
+        background:rgba(255,255,255,.92);
+        color:var(--ink);
+        font:800 11px Arial;
+        letter-spacing:.1em;
+        padding:7px 16px;
+        border-radius:999px;
+      }
+      .menu-options{list-style:none;margin:8px 0;padding:0}
+      .menu-options li{font-size:19px;font-weight:700;letter-spacing:-.03em;line-height:1.5;color:var(--ink)}
+    </style>
+    <script>
+      (function () {
+        var menuData = {
+          cake: {
+            category: "ケーキ",
+            usesTag: "家にあるパンの缶詰を使う",
+            options: ["白雪ショートケーキ", "チョコレートケーキ", "モンブラン"],
+            ingredients: "パンの缶詰 ＋ 生クリーム・お好みのフルーツやクリーム"
+          },
+          paella: {
+            category: "メイン料理",
+            usesTag: "家にあるアルファ米を使う",
+            options: ["備蓄米のパエリア", "チキンライス", "クリームリゾット"],
+            ingredients: "アルファ米 ＋ お好みの具材・調味料"
+          },
+          side: {
+            category: "副菜",
+            usesTag: "家にあるさば缶を使う",
+            options: ["さばのアヒージョ", "さばパスタ", "さばキッシュ"],
+            ingredients: "さば水煮缶 ＋ 旬の野菜・ハーブ"
+          }
+        };
+        function updateMenuCards() {
+          var cards = document.querySelectorAll(".menu-card");
+          if (!cards.length) return false;
+          var done = true;
+          cards.forEach(function (card) {
+            if (card.dataset.menuUpdated) return;
+            var key = ["cake", "paella", "side"].filter(function (k) {
+              return card.classList.contains(k);
+            })[0];
+            var data = key && menuData[key];
+            if (!data) return;
+            var copy = card.querySelector(".menu-copy");
+            var h3 = copy && copy.querySelector("h3");
+            var p = copy && copy.querySelector("p");
+            var tagSpan = copy && copy.querySelector("span");
+            var canLetter = card.querySelector(".food-can span");
+            if (!copy || !h3 || !p || !tagSpan) { done = false; return; }
+            var tag = document.createElement("span");
+            tag.className = "menu-category";
+            tag.textContent = data.category;
+            card.insertBefore(tag, card.firstChild);
+            var ul = document.createElement("ul");
+            ul.className = "menu-options";
+            ul.innerHTML = data.options.map(function (o) { return "<li>" + o + "</li>"; }).join("");
+            h3.replaceWith(ul);
+            p.textContent = data.ingredients;
+            tagSpan.textContent = data.usesTag;
+            if (canLetter) canLetter.textContent = "";
+            var caption = card.querySelector(".food-can-art > b");
+            if (caption) caption.remove();
+            card.dataset.menuUpdated = "1";
+          });
+          return done;
+        }
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
+          if (updateMenuCards() || tries > 100) clearInterval(timer);
+        }, 50);
+      })();
+    </script>
+
+    <!-- EXPERIMENTAL (2026-08-08): rename the STEP 02 label from
+         "リメイク品を選ぶ" to "リメイク食材を選ぶ".
+         Delete this <script> block to fully revert. -->
+    <script>
+      (function () {
+        function updateStep02Label() {
+          var labels = document.querySelectorAll(".kit .step-label");
+          if (!labels.length) return false;
+          labels.forEach(function (el) {
+            if (el.textContent.indexOf("リメイク品を選ぶ") !== -1) {
+              el.textContent = "リメイク食材を選ぶ";
+            }
+          });
+          return true;
+        }
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
+          if (updateStep02Label() || tries > 100) clearInterval(timer);
         }, 50);
       })();
     </script>
