@@ -6,7 +6,7 @@
     <meta name="description" content="備蓄食品をクリスマスのごちそうとして楽しみ、新しい備蓄へ入れ替える、年に一度の安心更新サービス。" />
     <link rel="icon" href="./assets/logo-mark.png" />
     <title>Merry Stock｜クリスマスに備蓄をおいしく入れ替える</title>
-    <script type="module" crossorigin src="./assets/index-DTNutL_Z.js?v=20260808b"></script>
+    <script type="module" crossorigin src="./assets/index-DTNutL_Z.js?v=20260808c"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-1Hqf6_9i.css">
   <link rel="stylesheet" crossorigin href="./assets/arrow-fix.css?v=20260803-31">
 </head>
@@ -1106,6 +1106,9 @@
     <style>
       .plan-cans-3{grid-template-columns:repeat(3,1fr)!important}
       .plan-cans-3 .can-icon{width:64px!important;height:64px!important}
+      .plan-cans-5{grid-template-columns:repeat(3,1fr)!important;justify-items:center!important}
+      .plan-cans-5 .can-icon{width:40px!important;height:40px!important}
+      .plan-cans-5 .can-icon:nth-child(5){animation-delay:-4.8s!important}
       .plan-grid{
         display:flex!important;
         overflow-x:auto!important;
@@ -1184,5 +1187,11 @@
         }, 50);
       })();
     </script>
+
+    <!-- EXPERIMENTAL (2026-08-08): round the header "備蓄をはじめる" button corners.
+         Delete this <style> block to fully revert. -->
+    <style>
+      .header-cta{border-radius:8px!important}
+    </style>
   </body>
 </html>
