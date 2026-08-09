@@ -6,7 +6,7 @@
     <meta name="description" content="備蓄食品をクリスマスのごちそうとして楽しみ、新しい備蓄へ入れ替える、年に一度の安心更新サービス。" />
     <link rel="icon" href="./assets/logo-mark.png" />
     <title>Merry Stock｜クリスマスに備蓄をおいしく入れ替える</title>
-    <script type="module" crossorigin src="./assets/index-DTNutL_Z.js?v=20260803-21"></script>
+    <script type="module" crossorigin src="./assets/index-DTNutL_Z.js?v=20260808b"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-1Hqf6_9i.css">
   <link rel="stylesheet" crossorigin href="./assets/arrow-fix.css?v=20260803-31">
 </head>
@@ -115,7 +115,7 @@
         }
         .hero-main{padding-top:58px!important;padding-bottom:24px!important}
         .hero-service-wordmark{width:clamp(340px,50vw,820px)!important;height:auto!important;margin:24px 0 22px!important}
-        .hero h1{margin-bottom:12px!important}
+        .hero h1{margin-bottom:22px!important}
         .hero-orbit{width:min(460px,34vw)!important;margin:26px auto 12px!important}
         .orbit-core p{display:none!important}
         .orbit-core strong{font-size:16px!important}
@@ -353,12 +353,12 @@
         padding:110px 6vw!important;
       }
       .future-copy{display:flex!important;flex-direction:column!important;align-items:flex-start!important;flex:0 1 660px!important}
-      .future blockquote{font-size:clamp(36px,3.9vw,56px)!important;line-height:1.22!important;margin:0 0 40px!important;white-space:nowrap!important}
+      .future blockquote{font-size:clamp(44px,4.8vw,68px)!important;line-height:1.22!important;margin:0 0 40px!important;white-space:nowrap!important}
       .future-illustration{width:min(560px,42vw)!important;height:auto!important;flex:0 0 auto!important}
       @media(max-width:900px){
         .future{flex-direction:column!important;text-align:center!important;padding:90px 24px!important;gap:36px!important}
         .future-copy{align-items:center!important;flex:0 1 auto!important}
-        .future blockquote{font-size:clamp(32px,8vw,46px)!important}
+        .future blockquote{font-size:clamp(38px,9vw,54px)!important}
         .future-illustration{width:min(360px,70vw)!important;order:-1!important}
       }
     </style>
@@ -704,7 +704,7 @@
       .about{padding-top:160px!important}
       .about-intro{align-items:stretch!important;margin-bottom:160px!important}
       .about-intro h2{margin-bottom:14px!important}
-      .about-photo-wrap{position:relative;z-index:5;overflow:visible;height:auto}
+      .about-photo-wrap{position:relative;z-index:5;overflow:visible;height:auto;align-self:end}
       .about-photo{position:static!important;z-index:5!important;inset:auto!important;width:100%!important;height:auto!important;margin:0!important;object-fit:contain!important;object-position:initial!important}
       .hero-title-can{width:min(220px,13vw)!important}
       .hero-can-align{align-items:flex-end!important}
@@ -722,11 +722,11 @@
     <script>
       (function () {
         var flow = [
-          ["ph-step1.png", "01", "備える", "人数に合った備蓄食品が、ひと箱にまとまって届きます。ここから、また一年の備えが始まります。"],
-          ["ph-step2.png", "02", "知らせる", "クリスマスの約1か月前にお知らせ。届いていた備蓄から、つくりたいごちそうを選びます。"],
-          ["ph-step-arrive.png", "03", "届く", "選んだごちそうに合わせて、リメイク食材とレシピが届きます。"],
-          ["ph-step3.png", "04", "作る", "届いた食材とレシピで、パエリアやケーキなどのクリスマス料理をつくります。"],
-          ["ph-step4.png", "05", "味わう", "できあがった料理を家族で味わい、食べた分だけ新しい備蓄が一緒に届きます。"]
+          ["ph-step1.png", "01", "備える", "備える人数に合わせて、一人ひと箱。必要な備蓄食品がまとまって届き、ここからまた一年の備えが始まります。"],
+          ["ph-step2.png", "02", "知らせる", "クリスマスの約1か月前にお知らせ。届いていた備蓄から、作りたいごちそうを選びます。"],
+          ["ph-step-arrive.png", "03", "届く", "選んだごちそうに合わせて、新鮮なリメイク食材とレシピ、そして新しい備蓄食品が一緒に届きます。"],
+          ["ph-step3.png", "04", "作る", "届いた食材とレシピで、パエリアやケーキなどのクリスマス料理を作ります。"],
+          ["ph-step4.png", "05", "味わう", "できあがった料理を家族で味わいます。一年間備えてきた食品を、おいしく食べ切る機会です。"]
         ];
 
         function fixNavLink() {
@@ -738,12 +738,15 @@
           if (aboutFlowLink && aboutFlowLink.textContent.indexOf("サービスの流れ") !== -1) {
             aboutFlowLink.setAttribute("href", "#flow");
           }
-          if (nav.dataset.navReordered) return true;
-          var aboutIntroLink = document.createElement("a");
-          aboutIntroLink.setAttribute("href", "#about");
-          aboutIntroLink.textContent = "MERRY STOCKとは？";
-          nav.insertBefore(aboutIntroLink, nav.firstElementChild);
-          nav.dataset.navReordered = "1";
+          var introLink = nav.querySelector('a[href="#about"]');
+          if (!introLink) {
+            introLink = document.createElement("a");
+            introLink.setAttribute("href", "#about");
+            introLink.textContent = "MERRY STOCKとは？";
+          }
+          nav.insertBefore(introLink, nav.firstElementChild);
+          var flowLink = nav.querySelector('a[href="#flow"]');
+          if (flowLink) nav.insertBefore(flowLink, introLink.nextSibling);
           return true;
         }
 
@@ -764,8 +767,9 @@
               "<p>災害に備えて非常食を用意しても、<br />賞味期限が近づいたまま、気づけば処分してしまう。<br />そんな経験はありませんか？</p>" +
               "<p>MERRY STOCKは、<br />賞味期限が近づいた非常食を、クリスマスにリメイクして味わい、<br />食べた分だけ、また新しく備え直す、年に一度の定期便サービスです。</p>" +
               "<p>もしもの日のための備えを、家族で味わう、年に一度の楽しみに。<br />そんな循環への想いから、MERRY STOCKが生まれました。</p>" +
+              '<img class="about-products" src="./assets/ph-products-row.png" alt="" aria-hidden="true" />' +
             "</div>" +
-            '<div class="about-photo-wrap"><img class="about-photo" src="./assets/ph-intro.png?v=20260808d" alt="" aria-hidden="true" /></div>';
+            '<div class="about-photo-wrap"><img class="about-photo" src="./assets/ph-intro.png?v=20260808g" alt="" aria-hidden="true" /></div>';
           section.appendChild(intro);
 
           var stepsWrap = document.createElement("div");
@@ -780,7 +784,7 @@
             flowHtml +=
               "<article>" +
                 '<div class="about-flow-photo">' +
-                  '<img src="./assets/' + f[0] + '?v=20260808" alt="" aria-hidden="true" />' +
+                  '<img src="./assets/' + f[0] + '?v=20260808c" alt="" aria-hidden="true" />' +
                   "<span>" + f[1] + "</span>" +
                 "</div>" +
                 "<h4>" + f[2] + "</h4>" +
@@ -800,13 +804,13 @@
             "<p>クリスマスに、家族や自分への感謝のメッセージや写真、緊急時の連絡先・避難場所などを一枚のカードに書き、<br />次の備蓄品と一緒にしまっておきます。</p>" +
             '<div class="about-grid">' +
               "<article>" +
-                '<img class="about-grid-photo" src="./assets/ph-peace.png" alt="" aria-hidden="true" />' +
+                '<img class="about-grid-photo" src="./assets/ph-peace.png?v=20260808a" alt="" aria-hidden="true" />' +
                 '<span class="keepsake-tag">平時の場合</span>' +
                 "<h4>毎年のクリスマスに</h4>" +
                 "<p>翌年のクリスマスに開けたときは、一年間の無事に感謝しながら振り返る、<br />家族の恒例行事に。</p>" +
               "</article>" +
               "<article>" +
-                '<img class="about-grid-photo" src="./assets/ph-emergency.png" alt="" aria-hidden="true" />' +
+                '<img class="about-grid-photo" src="./assets/ph-emergency.png?v=20260808a" alt="" aria-hidden="true" />' +
                 '<span class="keepsake-tag">有事の場合</span>' +
                 "<h4>もしものときに</h4>" +
                 "<p>災害時に開けたときは、家族の言葉と緊急連絡先が、<br />落ち着いて行動するための支えに。</p>" +
@@ -849,12 +853,33 @@
       })();
     </script>
 
+    <!-- EXPERIMENTAL (2026-08-08): remove the "CONCEPT PROTOTYPE / DESIGN
+         RESEARCH V · TEAM E" note from the footer.
+         Delete this <script> block to fully revert. -->
+    <script>
+      (function () {
+        function removeFooterNote() {
+          var small = document.querySelector("footer small");
+          if (small && small.textContent.indexOf("CONCEPT PROTOTYPE") !== -1) {
+            small.remove();
+          }
+          return true;
+        }
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
+          if (removeFooterNote() || tries > 100) clearInterval(timer);
+        }, 50);
+      })();
+    </script>
+
     <!-- EXPERIMENTAL (2026-08-08): swap the closing "future" section's headline
          to "MERRY STOCKする" and keep the old line as small subtext below it.
          Delete this <style>/<script> block to fully revert. -->
     <style>
-      .future blockquote{margin-bottom:8px!important}
+      .future blockquote{margin-bottom:24px!important}
       .future-sub{font-size:16px;line-height:1.8;margin:0 0 24px;color:var(--green);opacity:1;white-space:nowrap}
+      .future .button{margin-top:12px!important}
       .about-flow{grid-template-columns:repeat(5,1fr)!important}
       @media(max-width:900px){
         .about-flow{grid-template-columns:1fr 1fr!important}
@@ -901,6 +926,16 @@
       }
       .menu-options{list-style:none;margin:8px 0;padding:0}
       .menu-options li{font-size:19px;font-weight:700;letter-spacing:-.03em;line-height:1.5;color:var(--ink)}
+      .food-can-icon{height:40%;width:auto;max-width:70%;object-fit:contain}
+      .paella .food-can-icon{transform:translateY(-14px)}
+      .about-products{display:block;width:68%;height:auto;margin:28px 0 0}
+      @media(max-width:900px){
+        .about-products{width:80%}
+      }
+      .about-photo{width:120%!important;transform:translateY(18.4%)!important}
+      @media(max-width:900px){
+        .about-photo{width:100%!important;transform:none!important}
+      }
     </style>
     <script>
       (function () {
@@ -908,18 +943,21 @@
           cake: {
             category: "ケーキ",
             usesTag: "家にあるパンの缶詰を使う",
+            icon: "./assets/food-icon-bread.png?v=3",
             options: ["白雪ショートケーキ", "チョコレートケーキ", "モンブラン"],
             ingredients: "パンの缶詰 ＋ 生クリーム・お好みのフルーツやクリーム"
           },
           paella: {
             category: "メイン料理",
             usesTag: "家にあるアルファ米を使う",
+            icon: "./assets/food-icon-shrimp.png",
             options: ["備蓄米のパエリア", "チキンライス", "クリームリゾット"],
             ingredients: "アルファ米 ＋ お好みの具材・調味料"
           },
           side: {
             category: "副菜",
             usesTag: "家にあるさば缶を使う",
+            icon: "./assets/food-icon-saba.png",
             options: ["さばのアヒージョ", "さばパスタ", "さばキッシュ"],
             ingredients: "さば水煮缶 ＋ 旬の野菜・ハーブ"
           }
@@ -940,6 +978,7 @@
             var p = copy && copy.querySelector("p");
             var tagSpan = copy && copy.querySelector("span");
             var canLetter = card.querySelector(".food-can span");
+            var foodCan = card.querySelector(".food-can");
             if (!copy || !h3 || !p || !tagSpan) { done = false; return; }
             var tag = document.createElement("span");
             tag.className = "menu-category";
@@ -952,6 +991,14 @@
             p.textContent = data.ingredients;
             tagSpan.textContent = data.usesTag;
             if (canLetter) canLetter.textContent = "";
+            if (data.icon && foodCan) {
+              var icon = document.createElement("img");
+              icon.className = "food-can-icon";
+              icon.src = data.icon;
+              icon.alt = "";
+              foodCan.innerHTML = "";
+              foodCan.appendChild(icon);
+            }
             var caption = card.querySelector(".food-can-art > b");
             if (caption) caption.remove();
             card.dataset.menuUpdated = "1";
@@ -985,6 +1032,155 @@
         var timer = setInterval(function () {
           tries++;
           if (updateStep02Label() || tries > 100) clearInterval(timer);
+        }, 50);
+      })();
+    </script>
+
+    <!-- EXPERIMENTAL (2026-08-08): pixel-align the box photo so the box's
+         own top/bottom edges (excluding the drop shadow) line up with the
+         "MERRY STOCKとは？" heading's top and the product-row image's
+         bottom. Supersedes the earlier width/translateY sizing above on
+         desktop only (mobile keeps the simple static layout).
+         Delete this <style>/<script> block to fully revert. -->
+    <style>
+      @media(min-width:901px){
+        .about-photo-wrap{height:0!important;align-self:start!important;overflow:visible!important}
+        .about-photo{position:absolute!important;left:0!important;top:0!important;width:auto!important;max-width:none!important;transform:none!important;height:auto!important}
+      }
+    </style>
+    <script>
+      (function () {
+        var CONTENT_TOP_FRAC = 0.0131;
+        var CONTENT_BOTTOM_FRAC = 0.841;
+        var SIZE_SCALE = 1.15;
+        function positionAboutPhoto() {
+          var img = document.querySelector(".about-photo");
+          var wrap = document.querySelector(".about-photo-wrap");
+          var h2 = document.querySelector(".about-intro h2");
+          var products = document.querySelector(".about-products");
+          if (!img || !wrap || !h2 || !products) return false;
+          if (window.innerWidth <= 900) {
+            img.style.position = "";
+            img.style.left = "";
+            img.style.top = "";
+            img.style.height = "";
+            img.style.width = "";
+            img.style.maxWidth = "";
+            return true;
+          }
+          if (!img.complete || !img.naturalWidth) return false;
+          var h2Rect = h2.getBoundingClientRect();
+          var prodRect = products.getBoundingClientRect();
+          var wrapRect = wrap.getBoundingClientRect();
+          var targetTop = h2Rect.top - wrapRect.top;
+          var prodCenter = prodRect.top + prodRect.height / 2;
+          var targetSpan = prodCenter - h2Rect.top;
+          if (targetSpan <= 0) return false;
+          var contentFrac = CONTENT_BOTTOM_FRAC - CONTENT_TOP_FRAC;
+          var H = (targetSpan / contentFrac) * SIZE_SCALE;
+          var topPx = targetTop - CONTENT_TOP_FRAC * H;
+          img.style.setProperty("height", H + "px", "important");
+          img.style.setProperty("width", "auto", "important");
+          img.style.setProperty("top", topPx + "px", "important");
+          return true;
+        }
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
+          if (positionAboutPhoto() || tries > 140) clearInterval(timer);
+        }, 50);
+        window.addEventListener("load", positionAboutPhoto);
+        var resizeTimer;
+        window.addEventListener("resize", function () {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(positionAboutPhoto, 100);
+        });
+      })();
+    </script>
+
+    <!-- EXPERIMENTAL (2026-08-08): added a "3人分" plan card (data lives in
+         the compiled bundle's plans array). Keep the 3-per-row visual size
+         and let the 4th card overflow into a horizontally scrollable /
+         slidable row instead of squeezing everything into 4 columns.
+         Delete this <style> block to fully revert. -->
+    <style>
+      .plan-cans-3{grid-template-columns:repeat(3,1fr)!important}
+      .plan-cans-3 .can-icon{width:64px!important;height:64px!important}
+      .plan-grid{
+        display:flex!important;
+        overflow-x:auto!important;
+        scroll-snap-type:x proximity!important;
+        -webkit-overflow-scrolling:touch!important;
+        padding-bottom:10px!important;
+      }
+      .plan-grid article{
+        flex:0 0 320px!important;
+        scroll-snap-align:start!important;
+      }
+      @media(max-width:900px){
+        .plan-grid article{flex:0 0 78%!important}
+      }
+      .plan-grid-wrap{position:relative!important}
+      .plan-next-btn,.plan-prev-btn{
+        position:absolute!important;
+        top:50%!important;
+        transform:translateY(-50%)!important;
+        background:transparent!important;
+        color:var(--green)!important;
+        border:0!important;
+        display:grid!important;
+        place-items:center!important;
+        cursor:pointer!important;
+        z-index:3!important;
+        padding:8px!important;
+        font:900 26px/1 Arial!important;
+      }
+      .plan-next-btn{right:calc(16px - 5vw)!important}
+      .plan-prev-btn{left:calc(16px - 5vw)!important}
+      .plan-next-btn:hover,.plan-prev-btn:hover{color:var(--red)!important}
+      @media(max-width:900px){
+        .plan-next-btn,.plan-prev-btn{font-size:20px!important}
+        .plan-next-btn{right:calc(10px - 6vw)!important}
+        .plan-prev-btn{left:calc(10px - 6vw)!important}
+      }
+    </style>
+    <script>
+      (function () {
+        function addPlanNavButtons() {
+          var grid = document.querySelector(".plan-grid");
+          if (!grid) return false;
+          if (document.querySelector(".plan-next-btn")) return true;
+          var wrap = document.createElement("div");
+          wrap.className = "plan-grid-wrap";
+          grid.parentNode.insertBefore(wrap, grid);
+          wrap.appendChild(grid);
+
+          var nextBtn = document.createElement("button");
+          nextBtn.type = "button";
+          nextBtn.className = "plan-next-btn";
+          nextBtn.setAttribute("aria-label", "次のプランを見る");
+          nextBtn.textContent = "＞";
+          nextBtn.addEventListener("click", function () {
+            grid.scrollBy({ left: 332, behavior: "smooth" });
+          });
+          wrap.appendChild(nextBtn);
+
+          var prevBtn = document.createElement("button");
+          prevBtn.type = "button";
+          prevBtn.className = "plan-prev-btn";
+          prevBtn.setAttribute("aria-label", "前のプランを見る");
+          prevBtn.textContent = "＜";
+          prevBtn.addEventListener("click", function () {
+            grid.scrollBy({ left: -332, behavior: "smooth" });
+          });
+          wrap.appendChild(prevBtn);
+
+          return true;
+        }
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries++;
+          if (addPlanNavButtons() || tries > 100) clearInterval(timer);
         }, 50);
       })();
     </script>
