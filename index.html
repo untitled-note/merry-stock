@@ -6,7 +6,7 @@
     <meta name="description" content="備蓄食品をクリスマスのごちそうとして楽しみ、新しい備蓄へ入れ替える、年に一度の安心更新サービス。" />
     <link rel="icon" href="./assets/logo-mark.png" />
     <title>Merry Stock｜クリスマスに備蓄をおいしく入れ替える</title>
-    <script type="module" crossorigin src="./assets/index-DTNutL_Z.js?v=20260808c"></script>
+    <script type="module" crossorigin src="./assets/index-DTNutL_Z.js?v=20260809d"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-1Hqf6_9i.css">
   <link rel="stylesheet" crossorigin href="./assets/arrow-fix.css?v=20260803-31">
 </head>
@@ -1192,6 +1192,38 @@
          Delete this <style> block to fully revert. -->
     <style>
       .header-cta{border-radius:8px!important}
+    </style>
+
+    <!-- EXPERIMENTAL (2026-08-09): swap the "THANK YOU" complete-screen icon
+         (was a plain ↻ character) for a custom face icon image.
+         Delete this <style> block to fully revert. -->
+    <style>
+      .complete .complete-icon{
+        width:90px!important;
+        height:90px!important;
+        border-radius:50%!important;
+        background:var(--lime)!important;
+        display:block!important;
+        margin:0 auto!important;
+        object-fit:contain!important;
+        padding:26px!important;
+        box-sizing:border-box!important;
+      }
+    </style>
+
+    <!-- EXPERIMENTAL (2026-08-09): move "THANK YOU" above the complete-screen
+         icon (DOM order swapped in the bundle) and rebalance the spacing.
+         Delete this <style> block to fully revert. -->
+    <style>
+      .complete>p:first-of-type{margin-top:0!important}
+      .complete .complete-icon{margin:14px auto 20px!important}
+    </style>
+
+    <!-- EXPERIMENTAL (2026-08-09): widen the gap between the complete-screen
+         heading and the "登録を受け付けました。" line below it.
+         Delete this <style> block to fully revert. -->
+    <style>
+      .complete>p:not(:first-of-type){margin-top:22px!important}
     </style>
   </body>
 </html>
